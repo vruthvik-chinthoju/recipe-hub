@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}RecipeHub{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="/media/cooklogo.png" type="image/x-icon">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="/media/cooklogo.png" alt="Logo" class="logo">
+            <img src="/media/title.png" alt="Recipe Hub" class="title-img">
+        </div>
+        <div class="burger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Add Recipe</a>
+            <a href="{% url 'view' %}">Recipe Library</a>
+            <a href="{% url 'saved_recipes' %}">Saved</a>
+            <a href="{% url 'ai_recipe' %}">AI Chef</a>
+            <a href="{% url 'signup' %}">Register</a>
+            <a href="{% url 'signin' %}">Login</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+
+    </nav>
+    {% if messages %}
+    <div class="global-messages">
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        function toggleMenu() {
+            document.querySelector(".nav-links").classList.toggle("active");
+        }
+    </script>
+</body>
+
+</html>

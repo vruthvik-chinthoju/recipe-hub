@@ -1,0 +1,198 @@
+
+body {
+    background: url("/media/cookimage.avif") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.view-page {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    padding: 40px 20px;
+}
+
+.recipe-card {
+    width: 100%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.recipe-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: cursive;
+}
+
+
+.recipe-image img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+.no-image {
+    height: 260px;
+    border-radius: 14px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.recipe-desc {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-family: cursive;
+}
+
+.recipe-rating {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-family: cursive;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn {
+    padding: 12px 26px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: cursive;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px 20px rgba(0,0,0,0.25);
+}
+
+.update-btn {
+    background: black;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .recipe-card {
+        padding: 24px;
+    }
+
+    .recipe-title {
+        font-size: 1.6rem;
+    }
+
+    .recipe-image img,
+    .no-image {
+        max-height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+.card-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;   
+    gap:16px;                    
+    margin-top:12px;
+    padding-top:10px;
+    padding-bottom: 20px;
+    border-top:1px solid #eee;
+}
+
+.card-actions form{
+    margin:0;
+    padding:0;
+    display:inline-flex;
+}
+
+.action-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    color:#444;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    transition:all 0.2s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* ❤️ Like hover */
+.action-btn.like:hover{
+    color:#ff3b5c;
+}
+
+/* ⭐ Save hover */
+.action-btn.save:hover{
+    color:#f5b301;
+}
+
+/* 💬 Comment hover */
+.action-btn.comment:hover{
+    color:#4caf50;
+}
+
+.action-btn.share:hover{
+    color:#0077ff;
+}
+.comment-form{
+    margin-top:8px;
+    display:flex;
+    gap:6px;
+}
+
+.comment-form input{
+    flex:1;
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.comment-form button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+}

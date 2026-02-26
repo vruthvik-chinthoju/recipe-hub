@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AI Chef{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/recipe_agent.css' %}">
+<link rel="shortcut icon" href="/media/cooklogo.png" type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+
+<div class="mid">
+
+    <div class="ai-page">
+
+        <!-- HEADER -->
+        <div class="header-section">
+            <h1 class="page-title">AI Recipe Chef</h1>
+            <p class="page-subtitle">
+                Transform your ingredients into delicious recipes
+            </p>
+        </div>
+
+        <!-- GENERATED RECIPE -->
+        {% if history %}
+        {% with chat=history|last %}
+        <div class="ai-card">
+
+            <div class="recipe-header">
+                <h2 class="recipe-name">{{ chat.recipe.name }}</h2>
+                <span class="recipe-meta">AI Generated Recipe</span>
+            </div>
+
+            <div class="recipe-grid">
+
+                <!-- INGREDIENTS -->
+                <div class="recipe-section">
+                    <div class="section-header">
+                        🧂 <h3>Ingredients</h3>
+                    </div>
+                    <ul class="ingredient-list">
+                        {% for item in chat.recipe.ingredients %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- INSTRUCTIONS -->
+                <div class="recipe-section">
+                    <div class="section-header">
+                        🍳 <h3>Instructions</h3>
+                    </div>
+                    <ol class="steps-list">
+                        {% for step in chat.recipe.steps %}
+                        <li>{{ step }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+        {% endwith %}
+        {% endif %}
+
+        <!-- ERROR -->
+        {% if error %}
+        <div class="error-message">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <!-- INPUT -->
+        <form method="POST" class="input-bar">
+            {% csrf_token %}
+            <textarea
+                name="ingredients"
+                placeholder="Enter ingredients (comma separated)"
+                rows="2"
+                required
+            >{{ prefill }}</textarea>
+            <button type="submit" class="generate-btn">
+                Generate Recipe
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

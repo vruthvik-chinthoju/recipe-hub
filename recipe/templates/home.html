@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="shortcut icon" href="/media/cooklogo.png" type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+        </li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<div class="home-wrapper">
+    <div class="box">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h1>Recipes</h1>
+
+            <div>
+                <label for="name">Recipe Name</label>
+                <input type="text" name="recipe_name" id="name" required>
+            </div>
+
+            <div>
+                <label for="recipe_description">How To Cook</label>
+                <textarea name="recipe_description" id="recipe_description" required></textarea>
+            </div>
+
+            <div>
+                <label for="rating">Rate Your Dish</label>
+                <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
+            <div class="image">
+                <label for="image">Give Your Dish Image</label>
+                <input type="file" name="recipe_image" id="image">
+            </div>
+
+            <div>
+                <input type="submit" value="Add Your Recipe" id="submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

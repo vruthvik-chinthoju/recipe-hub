@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Recipe View{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/view1.css' %}">
+<link rel="stylesheet" href="/recipe/static/css/view1.css">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="view-page">
+    <div class="recipe-card">
+
+        <h1 class="recipe-title">{{ data.recipe_name }}</h1>
+        <div class="recipe-image">
+            {% if data.image %}
+            <img src="{{ data.image.url }}" alt="recipe image">
+            {% else %}
+            <div class="no-image">No Image Available</div>
+            {% endif %}
+        </div>
+
+        <p class="recipe-desc">
+            {{ data.recipe_description }}
+        </p>
+
+        <div class="recipe-rating">
+            ⭐ {{ data.rating }}
+        </div>
+
+        <div class="card-actions">
+
+            <form method="POST" action="{% url 'like_recipe' data.recipe_id %}">
+                {% csrf_token %}
+                <button type="submit" class="action-btn like">
+                    ❤️ {{ data.likes.count }}
+                </button>
+            </form>
+
+            <div class="comment-box">
+
+                <button class="action-btn comment" onclick="toggleComment('{{ data.recipe_id }}')">
+                    💬 {{ data.comments.count }}
+                </button>
+
+                <form method="POST" action="{% url 'add_comment' data.recipe_id %}" id="comment-{{ data.recipe_id }}"
+                    class="comment-form" style="display:none;">
+                    {% csrf_token %}
+                    <input type="text" name="comment" placeholder="Write a comment..." required>
+                    <button type="submit">Post</button>
+                </form>
+
+                <div class="comment-list" id="comments-{{ data.recipe_id }}" style="display:none;">
+                    {% for c in data.comments.all %}
+                    <p class="single-comment">💬 {{ c.text }}</p>
+                    {% empty %}
+                    <p class="single-comment no-comment">No comments yet</p>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <form method="POST" action="{% url 'save_recipe' data.recipe_id %}">
+                {% csrf_token %}
+                <button type="submit" class="action-btn save">
+                    ⭐ Save
+                </button>
+            </form>
+
+            <button class="action-btn share" data-url="{% url 'view_1' sid=data.recipe_id %}"
+                onclick="copyLink(this.dataset.url)">
+                🔗 Share
+            </button>
+
+        </div>
+
+        <div class="action-buttons">
+            <a href="{% url 'update' rec_id=data.recipe_id %}" class="btn update-btn">
+                Update
+            </a>
+            <a href="{% url 'delete' rec_id=data.recipe_id %}" class="btn delete-btn">
+                Delete
+            </a>
+        </div>
+
+    </div>
+</div>
+<script>
+function toggleComment(id){
+    const form = document.getElementById("comment-" + id);
+    const list = document.getElementById("comments-" + id);
+
+    if(form.style.display === "none"){
+        form.style.display = "flex";
+        list.style.display = "block";
+    }else{
+        form.style.display = "none";
+        list.style.display = "none";
+    }
+}
+
+function copyLink(url){
+    const fullUrl = window.location.origin + url;
+
+    const temp = document.createElement("input");
+    temp.value = fullUrl;
+    document.body.appendChild(temp);
+
+    temp.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(temp);
+    alert("Link copied 🔗");
+}
+</script>
+
+{% endblock %}

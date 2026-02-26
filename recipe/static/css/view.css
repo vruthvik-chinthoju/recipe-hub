@@ -1,0 +1,519 @@
+/* ---------------- Container ---------------- */
+.con {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-image: url('/media/wallpaper4.jpeg');
+}
+
+/* ---------------- Search Bar ---------------- */
+.top-search {
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    height: 100px;
+    background: darkorange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.top-search form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+}
+
+.top-search input {
+    width: 420px;
+    max-width: 80vw;
+    padding: 14px 18px;
+    border-radius: 999px;
+    border: 1px solid black;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background: #FFF6EC;
+    border: 2px solid blackr;
+    color: black;
+}
+
+.top-search input:focus {
+    border-color: black;
+    box-shadow: 0 0 0 4px rgba(242, 97, 63, 0.15);
+}
+
+.top-search button {
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: none;
+    background: rgb(179, 25, 25);
+    color: white;
+    font-family: cursive;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.top-search button {
+    background-color: rgb(196, 91, 42);
+}
+
+.top-search button:hover {
+    transform: translateY(-2px);
+    background-color: rgb(211, 56, 9);
+    box-shadow: 0 8px 20px rgba(180, 93, 12, 0.4);
+}
+
+/* ---------------- Cards Container ---------------- */
+.box {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    flex-grow: calc(4.5);
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    padding: 24px;
+    padding-top: 100px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    background-image: url(/media/cooking.jpg);
+    background-size: cover;
+    background-position: center;
+    animation: fadeUp 0.6s ease-out;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-color: black;
+}
+
+.box::-webkit-scrollbar {
+    display: none;
+}
+
+/* Background overlay */
+.box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* ---------------- No Results ---------------- */
+.no-results {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 26px rgba(243, 122, 10, 0.7);
+}
+
+.no-results p {
+    font-family: cursive;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.ai-button {
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ai-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+/* ---------------- Card ---------------- */
+.card {
+    position: relative;
+    z-index: 1;
+    min-width: 360px;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* box-shadow: 0 0 40px rgba(189, 209, 12, 0.7); */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    scroll-snap-align: start;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    font-family: cursive;
+    font-size: 22px;
+    text-align: center;
+    letter-spacing: 0.4px;
+}
+
+.card p {
+    font-family: cursive;
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ---------------- Links & Rating ---------------- */
+.see-more {
+    display: inline-block;
+    margin-top: 6px;
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: underline;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.see-more:hover {
+    color: #1e40af;
+    transform: translateX(4px);
+}
+
+.rating {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ---------------- Cursor UX ---------------- */
+.box {
+    cursor: grab;
+}
+
+.box:active {
+    cursor: grabbing;
+}
+
+
+/* ---------------- Animations ---------------- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------------- Mobile Responsive ---------------- */
+@media (max-width: 768px) {
+    .con {
+        padding: 0 10px;
+    }
+
+    .top-search {
+        margin-top: 70px;
+        height: auto;
+        padding: 20px 0;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .top-search form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .top-search input {
+        width: 90%;
+        max-width: 90%;
+    }
+
+    .top-search button {
+        width: 90%;
+    }
+
+    .top-search input {
+        background: #FFF6EC;
+        border: 2px solid #FF9F1C;
+        color: gold;
+    }
+
+    .top-search button {
+        background: #FF6A00;
+        color: #fff;
+    }
+
+
+    /* 🔥 VERTICAL SCROLL FOR MOBILE */
+    .box {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: auto;
+        height: auto;
+        max-height: 100vh;
+        min-height: 100vh;
+        padding-top: 0px;
+        padding: 16px;
+        gap: 20px;
+        background-image: url("/media/wallpaper4.jpeg");
+    }
+
+    .box::before {
+        display: none;
+    }
+
+    .card {
+        width: 100%;
+        min-width: unset;
+        max-width: 100%;
+        margin-bottom: 10px;
+        margin-top: 50px;
+    }
+
+    .card img {
+        height: 160px;
+    }
+
+    .no-results {
+        margin: 20px 0;
+        padding: 30px 20px;
+    }
+
+    .ai-button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+
+/* For very small mobile devices */
+@media (max-width: 480px) {
+    .top-search input {
+        width: 95%;
+        max-width: 95%;
+        padding: 12px 16px;
+    }
+
+    .top-search button {
+        width: 95%;
+        padding: 12px 20px;
+    }
+
+    .box {
+        flex-wrap: nowrap;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .card h2 {
+        font-size: 20px;
+    }
+}
+
+/* ===== NO RESULTS CARD ===== */
+.no-results {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px 30px;
+
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    text-align: center;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.no-results p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.ask-ai-btn {
+    display: inline-block;
+    padding: 14px 32px;
+
+    background: rgb(60, 20, 201);
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid black;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    font-family: cursive;
+
+    transition: all 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.ask-ai-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(108, 77, 246, 0.4);
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .no-results {
+        padding: 30px 20px;
+        margin: 25px 15px;
+    }
+
+    .no-results p {
+        font-size: 1.1rem;
+    }
+
+    .ask-ai-btn {
+        width: 100%;
+        padding: 14px;
+    }
+}
+
+.card-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;   /* better social layout */
+    gap:16px;                     /* spacing between icons */
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px solid #eee;
+}
+
+/* forms behave like inline buttons */
+.card-actions form{
+    margin:0;
+    padding:0;
+    display:inline-flex;
+}
+
+.action-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    color:#444;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    transition:all 0.2s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* ❤️ Like hover */
+.action-btn.like:hover{
+    color:#ff3b5c;
+}
+
+/* ⭐ Save hover */
+.action-btn.save:hover{
+    color:#f5b301;
+}
+
+/* 💬 Comment hover */
+.action-btn.comment:hover{
+    color:#4caf50;
+}
+
+/* 🔗 Share hover */
+.action-btn.share:hover{
+    color:#0077ff;
+}
+.comment-form{
+    margin-top:8px;
+    display:flex;
+    gap:6px;
+}
+
+.comment-form input{
+    flex:1;
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.comment-form button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.external{
+    border:2px dashed #f97316;
+    opacity:0.95;
+}
+
+.external-title{
+    width:100%;
+    color:black;
+    font-family: cursive;
+    margin:20px 0 10px;
+}
+
+
+.load-more-wrap button{
+    background-color:black;
+    padding: 15px;
+    font-family: cursive;
+    border: none;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+.load-more-wrap button:hover{
+    background-color: rgb(39, 37, 37);
+}

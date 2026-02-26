@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Recipe Library{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/view.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="messages-wrapper">
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<div class="con">
+    <div class="top-search">
+        <form id="searchForm" method="GET" action="{% url 'search' %}">
+            <input type="text" id="searchInput" name="q" placeholder="Search recipe or ask AI Chef..."
+                value="{{ search_query|default:'' }}">
+            <button type="submit" id="searchBtn">Search Recipe</button>
+        </form>
+    </div>
+
+    <div class="box" id="recipeContainer">
+
+        {% if search_query and recipe_datas|length == 0 %}
+        <!-- 🔎 No Search Results -->
+        <div class="no-results">
+            <p>No recipes found for "{{ search_query }}"</p>
+            <a href="{% url 'ai_recipe' %}?q={{ search_query }}" class="ask-ai-btn">
+                Ask AI Chef for "{{ search_query }}"
+            </a>
+        </div>
+
+        {% else %}
+
+        {% for data in recipe_datas %}
+
+        <div class="card">
+
+            {% if data.image %}
+            <img src="{{ data.image.url }}" alt="recipe image">
+            {% endif %}
+
+            <h2>{{ data.recipe_name }}</h2>
+
+            <p>
+                {{ data.recipe_description|truncatewords:6 }}
+                <a href="{% url 'view_1' sid=data.recipe_id %}" class="see-more">
+                    See Details
+                </a>
+            </p>
+
+            <p class="rating">⭐ {{ data.rating }}</p>
+
+            <div class="card-actions">
+
+                <form method="POST" action="{% url 'like_recipe' data.recipe_id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="action-btn like">
+                        ❤️ {{ data.likes.count }}
+                    </button>
+                </form>
+
+                <div class="comment-box">
+
+                    <button class="action-btn comment" onclick="toggleComment('{{ data.recipe_id }}')">
+                        💬 {{ data.comments.count }}
+                    </button>
+                    <form method="POST" action="{% url 'add_comment' data.recipe_id %}"
+                        id="comment-{{ data.recipe_id }}" class="comment-form" style="display:none;">
+                        {% csrf_token %}
+                        <input type="text" name="comment" placeholder="Write a comment..." required>
+                        <button type="submit">Post</button>
+                    </form>
+
+                    <div class="comment-list" id="comments-{{ data.recipe_id }}" style="display:none;">
+                        {% for c in data.comments.all %}
+                        <p class="single-comment">💬 {{ c.text }}</p>
+                        {% empty %}
+                        <p class="single-comment no-comment">No comments yet</p>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <form method="POST" action="{% url 'save_recipe' data.recipe_id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="action-btn save">
+                        ⭐ Save
+                    </button>
+                </form>
+
+                <button class="action-btn share" data-url="{% url 'view_1' sid=data.recipe_id %}"
+                    onclick="copyLink(this.dataset.url)">
+                    🔗 Share
+                </button>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+        <div class="no-results">
+            <p>No recipes available yet.</p>
+        </div>
+        {% endfor %}
+        {% if external_recipes %}
+        <h2 class="external-title">External Recipes</h2>
+
+        {% for r in external_recipes %}
+
+        <div class="card external">
+
+            {% if r.strMealThumb %}
+            <img src="{{ r.strMealThumb }}" alt="external recipe">
+            {% endif %}
+
+            <h2>{{ r.strMeal }}</h2>
+
+            <p>
+                {{ r.strInstructions|truncatewords:6 }}
+                {% if r.strSource %}
+                <a href="{{ r.strSource }}" target="_blank" class="see-more">
+                    View Original
+                </a>
+                {% endif %}
+            </p>
+
+            <p class="rating">⭐ API Recipe</p>
+
+        </div>
+        {% endfor %}
+        <div class="load-more-wrap">
+            <button id="loadMoreBtn">Load More</button>
+        </div>
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+</div>
+
+<script>
+    function toggleComment(id) {
+        const form = document.getElementById("comment-" + id);
+        const list = document.getElementById("comments-" + id);
+
+        if (form.style.display === "none") {
+            form.style.display = "flex";
+            list.style.display = "block";
+        } else {
+            form.style.display = "none";
+            list.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    function copyLink(url) {
+        const fullUrl = window.location.origin + url;
+        navigator.clipboard.writeText(fullUrl);
+        alert("Link copied 🔗");
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const btn = document.getElementById("loadMoreBtn");
+
+        if (!btn) return;
+
+        btn.addEventListener("click", function () {
+
+            fetch("{% url 'load_more_api' %}")
+                .then(res => res.json())
+                .then(data => {
+
+                    data.recipes.forEach(r => {
+
+                        const card = document.createElement("div");
+                        card.className = "card external";
+
+                        card.innerHTML = `
+                    <img src="${r.image}">
+                    <h2>${r.name}</h2>
+                    <p>${r.desc}...</p>
+                    ${r.source ? `<a href="${r.source}" target="_blank" class="see-more">View Original</a>` : ""}
+                    <p class="rating">⭐ API Recipe</p>
+                `;
+
+                        // ⭐ INSERT ABOVE LOAD MORE BUTTON
+                        btn.parentElement.before(card);
+
+                    });
+
+                })
+                .catch(err => console.log(err));
+
+        });
+
+    });
+</script>
+
+<script src="{% static 'js/search.js' %}"></script>
+
+{% endblock %}

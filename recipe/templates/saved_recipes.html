@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/saved_recipes.css' %}">
+{% endblock %}
+
+{% block title %}Saved Recipes{% endblock %}
+
+{% block content %}
+
+<div class="con">
+    <h2>Your Saved Recipes </h2>
+
+    <div class="box">
+        {% for item in saved_items %}
+        <div class="card">
+
+            {% if item.recipe.image %}
+            <img src="{{ item.recipe.image.url }}">
+            {% endif %}
+
+            <h3>{{ item.recipe.recipe_name }}</h3>
+
+            <p>
+                {{ item.recipe.recipe_description|truncatewords:8 }}
+                <a href="{% url 'view_1' sid=item.recipe.recipe_id %}">
+                    See Details
+                </a>
+            </p>
+
+            <p>⭐ {{ item.recipe.rating }}</p>
+            <form method="POST" action="{% url 'remove_saved' item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="remove-btn">
+                    Remove Recipe
+                </button>
+            </form>
+
+        </div>
+       
+        {% empty %}
+        <p>No saved recipes yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
