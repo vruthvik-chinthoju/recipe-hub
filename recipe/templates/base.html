@@ -4,18 +4,20 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}RecipeHub{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="shortcut icon" href="/media/cooklogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'media/cooklogo.png' %}" type="image/x-icon">
     {% block css %}{% endblock %}
 </head>
 
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <img src="{% static 'media/logo.png' %}" alt="Logo">
-            <img src="{% static 'media/title.png' %}" alt="Recipe Hub" class="title-img">
+            {% load static %}
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+            <img src="{% static 'images/title.png' %}" alt="Title">
         </div>
         <div class="burger" onclick="toggleMenu()">
             <span></span>

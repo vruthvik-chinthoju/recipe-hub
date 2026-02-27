@@ -28,19 +28,14 @@ body{
     gap:14px;
     font-family: cursive;
 }
-
-/* INPUTS */
 .auth-container input{
     width:100%;
     padding:12px 14px;
-
     border-radius:10px;
     border:1px solid #374151;
-
     background:#111827;
     color:#fff;
     font-size:14px;
-
     outline:none;
     transition:0.25s;
 }
@@ -50,19 +45,15 @@ body{
     box-shadow:0 0 0 2px rgba(249,115,22,0.2);
 }
 
-/* BUTTON */
 .auth-container button{
     margin-top:10px;
     padding:12px;
-
     border:none;
     border-radius:12px;
-
     background:linear-gradient(135deg,#f97316,#fb923c);
     color:white;
     font-weight:700;
     font-size:15px;
-
     cursor:pointer;
     transition:0.25s;
 }
@@ -72,7 +63,6 @@ body{
     box-shadow:0 8px 20px rgba(249,115,22,0.4);
 }
 
-/* LINKS */
 .auth-container p{
     text-align:center;
     margin-top:12px;
