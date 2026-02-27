@@ -25,13 +25,14 @@ body {
 }
 
 .logo {
+    margin-bottom: 15px;
     width: 40px;
     height: 40px;
     object-fit: contain;
 }
 
 .title-img {
-    height: 45px;
+    height: 60px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
@@ -59,6 +60,7 @@ body {
     display: none;
     flex-direction: column;
     gap: 5px;
+    padding: 20px;
     cursor: pointer;
 }
 
