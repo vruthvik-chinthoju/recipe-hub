@@ -2,13 +2,14 @@
     max-width:1100px;
     margin:40px auto;
     padding:0 20px;
-    padding-top:90px; 
+    padding-top:10px; 
 }
 
 .con h2{
     font-size:clamp(20px, 3vw, 28px);
     margin-bottom:20px;
     font-weight:600;
+    font-family: cursive;
 }
 
 .box{
@@ -18,6 +19,7 @@
 }
 
 .card{
+    font-family: cursive;
     background:#fff;
     border-radius:14px;
     overflow:hidden;
@@ -25,6 +27,7 @@
     transition:all 0.25s ease;
     display:flex;
     flex-direction:column;
+    border: 1px solid black;
 }
 
 .card:hover{
@@ -41,6 +44,7 @@
 .card h3{
     font-size:18px;
     margin:12px 14px 6px;
+    font-family: cursive;
 }
 
 .card p{
@@ -48,6 +52,7 @@
     color:#555;
     margin:0 14px 12px;
     line-height:1.5;
+    font-family: cursive;
 }
 
 .card p:last-child{
@@ -60,6 +65,7 @@
     text-decoration:none;
     color:#ff4d4d;
     font-weight:500;
+    font-family: cursive;
 }
 
 .card a:hover{
@@ -75,6 +81,7 @@
     border-radius:6px;
     cursor:pointer;
     font-size:14px;
+    font-family: cursive;
     transition:0.2s;
 }
 

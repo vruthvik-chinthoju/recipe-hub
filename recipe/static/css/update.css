@@ -8,7 +8,6 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
     z-index: 0;
 }
 .update-wrapper {
@@ -16,7 +15,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px 20px 40px 20px; /* top padding for navbar */
+    padding: 10px 20px 40px 20px; /* top padding for navbar */
     position: relative;
     z-index: 1;
 }
@@ -25,6 +24,7 @@ body::before {
     max-width: 700px;
     background: rgba(255,255,255,0.96);
     padding: 32px;
+    font-family: cursive;
     border-radius: 20px;
     box-shadow: 0 30px 70px rgba(0,0,0,0.35);
 }
@@ -53,6 +53,7 @@ select {
     border: 1px solid #ccc;
     font-size: 1rem;
     transition: 0.25s ease;
+    font-family: cursive;
 }
 
 input:focus,
@@ -93,7 +94,7 @@ textarea {
 @media (max-width: 600px) {
 
     .update-wrapper {
-        padding: 90px 15px 30px 15px;
+        padding: 10px 15px 30px 15px;
         align-items: flex-start;
     }
 

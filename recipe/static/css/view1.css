@@ -1,6 +1,7 @@
 /* ===== BACKGROUND ===== */
 body {
-    background: url("../images/cookimage.avif") no-repeat center center fixed;
+    background: url("https://img.freepik.com/free-photo/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper_1258-82939.jpg?semt=ais_user_personalization&w=740&q=80") no-repeat center center fixed;
+    background-position: center;
     background-size: cover;
     min-height: 100vh;
 }
@@ -9,7 +10,6 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.35);
     z-index: 0;
 }
 
@@ -19,7 +19,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px 20px 40px 20px; /* navbar spacing */
+    padding: 20px 20px 40px 20px; 
     position: relative;
     z-index: 1;
 }
@@ -80,6 +80,7 @@ body::before {
 .action-buttons {
     display: flex;
     justify-content: center;
+    margin-top: 15px;
     gap: 16px;
 }
 
@@ -105,6 +106,85 @@ body::before {
     background: #dc3545;
 }
 
+.card-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;   /* better social layout */
+    gap:16px;                     /* spacing between icons */
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px solid #eee;
+}
+
+/* forms behave like inline buttons */
+.card-actions form{
+    margin:0;
+    padding:0;
+    display:inline-flex;
+}
+
+.action-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    color:#444;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    transition:all 0.2s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* ❤️ Like hover */
+.action-btn.like:hover{
+    color:#ff3b5c;
+}
+
+/* ⭐ Save hover */
+.action-btn.save:hover{
+    color:#f5b301;
+}
+
+/* 💬 Comment hover */
+.action-btn.comment:hover{
+    color:#4caf50;
+}
+.box::before {
+    pointer-events: none;
+}
+
+/* 🔗 Share hover */
+.action-btn.share:hover{
+    color:#0077ff;
+}
+.comment-form{
+    margin-top:8px;
+    display:flex;
+    gap:6px;
+}
+
+.comment-form input{
+    flex:1;
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.comment-form button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
 
@@ -120,6 +200,13 @@ body::before {
     .no-image {
         max-height: 220px;
     }
+    .view-page{
+        padding: 0px;
+        padding-left: 5px;
+    }
+    .card{
+        width: 500px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -129,7 +216,7 @@ body::before {
     }
 
     .btn {
-        width: 100%;
+        width: 80%;
         text-align: center;
     }
 }

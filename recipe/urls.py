@@ -4,7 +4,7 @@ from recipe import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('view_recipe/', views.view, name='view'),
-    path('view_1/<str:sid>/', views.view_1, name='view_1'),
+    path('view_1/<uuid:sid>/', views.view_1, name='view_1'),
     path('update/<str:rec_id>/', views.update, name='update'),
     path('delete/<str:rec_id>/', views.delete, name='delete'),
     path('search/', views.recipe_library, name='search'),

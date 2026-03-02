@@ -21,26 +21,16 @@
 
 <div class="con">
     <div class="top-search">
-        <form id="searchForm" method="GET" action="{% url 'search' %}">
+        <form id="searchForm" method="GET" action="{% url 'view' %}">
             <input type="text" id="searchInput" name="q" placeholder="Search recipe or ask AI Chef..."
                 value="{{ search_query|default:'' }}">
             <button type="submit" id="searchBtn">Search Recipe</button>
         </form>
     </div>
-
     <div class="box" id="recipeContainer">
+        <h2 class="external-title">Original Recipes</h2>
 
-        {% if search_query and recipe_datas|length == 0 %}
-        <!-- 🔎 No Search Results -->
-        <div class="no-results">
-            <p>No recipes found for "{{ search_query }}"</p>
-            <a href="{% url 'ai_recipe' %}?q={{ search_query }}" class="ask-ai-btn">
-                Ask AI Chef for "{{ search_query }}"
-            </a>
-        </div>
-
-        {% else %}
-
+        {% if recipe_datas %}
         {% for data in recipe_datas %}
 
         <div class="card">
@@ -62,18 +52,35 @@
 
             <div class="card-actions">
 
-                <form method="POST" action="{% url 'like_recipe' data.recipe_id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="action-btn like">
-                        ❤️ {{ data.likes.count }}
+                <div class="social-actions" id="social-{{ data.recipe_id }}">
+
+                    <form method="POST" action="{% url 'like_recipe' data.recipe_id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="action-btn like">
+                            ❤️ {{ data.likes.count }}
+                        </button>
+                    </form>
+
+                    <form method="POST" action="{% url 'save_recipe' data.recipe_id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="action-btn save">
+                            ⭐ Save
+                        </button>
+                    </form>
+
+                    <button class="action-btn share" data-url="{% url 'view_1' sid=data.recipe_id %}"
+                        onclick="copyLink(this.dataset.url)">
+                        🔗 Share
                     </button>
-                </form>
+
+                </div>
 
                 <div class="comment-box">
 
                     <button class="action-btn comment" onclick="toggleComment('{{ data.recipe_id }}')">
                         💬 {{ data.comments.count }}
                     </button>
+
                     <form method="POST" action="{% url 'add_comment' data.recipe_id %}"
                         id="comment-{{ data.recipe_id }}" class="comment-form" style="display:none;">
                         {% csrf_token %}
@@ -85,35 +92,26 @@
                         {% for c in data.comments.all %}
                         <p class="single-comment">💬 {{ c.text }}</p>
                         {% empty %}
-                        <p class="single-comment no-comment">No comments yet</p>
+                        <p class="single-comment no-comment">
+                            No comments yet
+                        </p>
                         {% endfor %}
                     </div>
 
                 </div>
-                <form method="POST" action="{% url 'save_recipe' data.recipe_id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="action-btn save">
-                        ⭐ Save
-                    </button>
-                </form>
-
-                <button class="action-btn share" data-url="{% url 'view_1' sid=data.recipe_id %}"
-                    onclick="copyLink(this.dataset.url)">
-                    🔗 Share
-                </button>
 
             </div>
-
         </div>
 
-        {% empty %}
-        <div class="no-results">
-            <p>No recipes available yet.</p>
-        </div>
         {% endfor %}
-        {% if external_recipes %}
+        {% else %}
+        <div class="no-results">
+            <p>No original recipes found.</p>
+        </div>
+        {% endif %}
         <h2 class="external-title">External Recipes</h2>
 
+        {% if external_recipes %}
         {% for r in external_recipes %}
 
         <div class="card external">
@@ -136,51 +134,99 @@
             <p class="rating">⭐ API Recipe</p>
 
         </div>
+
         {% endfor %}
-        <div class="load-more-wrap">
-            <button id="loadMoreBtn">Load More</button>
+        {% else %}
+        <div class="no-results">
+            <p>No external recipes found.</p>
         </div>
         {% endif %}
 
-        {% endif %}
+        <div id="scrollLoader" style="width:100%; text-align:center;
+               padding:20px; display:none;
+               font-family: cursive;">
+            <p>Loading more recipes...</p>
+        </div>
 
     </div>
-</div>
 
-<script>
-    function toggleComment(id) {
-        const form = document.getElementById("comment-" + id);
-        const list = document.getElementById("comments-" + id);
+    <script>
+        function toggleComment(id) {
 
-        if (form.style.display === "none") {
-            form.style.display = "flex";
-            list.style.display = "block";
-        } else {
-            form.style.display = "none";
-            list.style.display = "none";
+            const form = document.getElementById("comment-" + id);
+            const list = document.getElementById("comments-" + id);
+            const social = document.getElementById("social-" + id);
+
+            const isHidden = form.style.display === "none";
+
+            if (isHidden) {
+                form.style.display = "flex";
+                list.style.display = "flex";
+                list.style.alignItems = "center";
+                social.style.display = "none";
+            } else {
+                form.style.display = "none";
+                list.style.display = "none";
+                social.style.display = "flex";
+            }
         }
-    }
-</script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-<script>
-    function copyLink(url) {
-        const fullUrl = window.location.origin + url;
-        navigator.clipboard.writeText(fullUrl);
-        alert("Link copied 🔗");
-    }
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("searchInput");
+            const searchForm = document.getElementById("searchForm");
 
-        const btn = document.getElementById("loadMoreBtn");
+            let timeout;
 
-        if (!btn) return;
+            if (searchInput) {
+                searchInput.addEventListener("keyup", function () {
 
-        btn.addEventListener("click", function () {
+                    clearTimeout(timeout);
 
-            fetch("{% url 'load_more_api' %}")
-                .then(res => res.json())
-                .then(data => {
+                    timeout = setTimeout(() => {
+                        searchForm.submit();
+                    }, 400);
+
+                });
+            }
+
+        });
+    </script>
+
+    <script>
+        function copyLink(url) {
+            const fullUrl = window.location.origin + url;
+            navigator.clipboard.writeText(fullUrl);
+            alert("Link copied 🔗");
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let page = 1;
+            let loading = false;
+            let hasMore = true;
+
+            const container = document.querySelector(".card.external")
+                ? document.querySelector(".card.external").parentElement
+                : document.getElementById("recipeContainer");
+            const loader = document.getElementById("scrollLoader");
+
+            async function loadMoreRecipes() {
+
+                if (loading || !hasMore) return;
+
+                loading = true;
+                loader.style.display = "block";
+
+                try {
+                    const response = await fetch("{% url 'load_more_api' %}?page=" + page);
+                    const data = await response.json();
+
+                    if (data.recipes.length === 0) {
+                        hasMore = false;
+                        loader.innerHTML = "<p>No more recipes</p>";
+                        return;
+                    }
 
                     data.recipes.forEach(r => {
 
@@ -195,19 +241,29 @@
                     <p class="rating">⭐ API Recipe</p>
                 `;
 
-                        // ⭐ INSERT ABOVE LOAD MORE BUTTON
-                        btn.parentElement.before(card);
-
+                        container.appendChild(card);
                     });
 
-                })
-                .catch(err => console.log(err));
+                    page++;
+                } catch (error) {
+                    console.log(error);
+                }
+
+                loader.style.display = "none";
+                loading = false;
+            }
+
+            // 🔥 Trigger when near bottom
+            window.addEventListener("scroll", function () {
+
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
+                    loadMoreRecipes();
+                }
+
+            });
 
         });
+    </script>
+    <script src="{% static 'js/search.js' %}"></script>
 
-    });
-</script>
-
-<script src="{% static 'js/search.js' %}"></script>
-
-{% endblock %}
+    {% endblock %}

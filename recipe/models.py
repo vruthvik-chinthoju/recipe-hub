@@ -6,7 +6,7 @@ import uuid
 class RecipeData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe_id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    recipe_name = models.CharField(max_length=150)
+    recipe_name = models.CharField(max_length=150,db_index=True)
     recipe_description = models.TextField()
     rating = models.PositiveIntegerField()
     image = models.ImageField(upload_to='image/')
@@ -24,13 +24,13 @@ class Like(models.Model):
         unique_together = ("user", "recipe")
 
 
-
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE)
     recipe = models.ForeignKey(RecipeData, on_delete=models.CASCADE, related_name="comments")
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
 
 class SavedRecipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

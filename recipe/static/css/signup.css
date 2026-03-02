@@ -22,21 +22,24 @@ body{
     font-size:clamp(20px,3vw,26px);
     font-weight:700;
     color:#facc15;
+    font-family: cursive;
 }
 .auth-container form{
     display:flex;
     flex-direction:column;
     gap:14px;
+    font-family: cursive;
 }
 
 .auth-container input{
-    width:100%;
+    width:90%;
     padding:14px;
     border-radius:10px;
     border:1px solid #374151;
     background:#111827;
     color:#fff;
     font-size:14px;
+    font-family: cursive;
     outline:none;
     transition:0.25s;
 }
@@ -55,6 +58,7 @@ body{
     font-weight:700;
     font-size:15px;
     cursor:pointer;
+    font-family: cursive;
     transition:0.25s;
 }
 
@@ -67,6 +71,7 @@ body{
     text-align:center;
     margin-top:12px;
     font-size:14px;
+    font-family: cursive;
 }
 
 .auth-container a{
@@ -80,12 +85,24 @@ body{
 }
 
 @media(max-width:480px){
+        body{
+        background-image: url('../images/wallpaper4.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
 
     body{
         padding-top:90px;
+        padding-right: 70px;
+        align-items: center;
+        justify-content: center;
+    }
+    .auth-container input{
+        padding: 10px;
+        width: 90%;
     }
 
-    .auth-container{
+    .auth-container{        
         padding:25px 20px;
         border-radius:14px;
     }

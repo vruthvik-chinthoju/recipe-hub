@@ -32,7 +32,7 @@ body {
 }
 
 .title-img {
-    height: 60px;
+    height: 100px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
@@ -42,14 +42,19 @@ body {
     display: flex;
     gap: 20px;
     align-items: center;
+    margin-left: 30px;
+    padding-left: 50px;
 }
 
 .nav-links a {
     color: #e5e7eb;
     text-decoration: none;
-    font-family: "pop-bold";
+    font-family: cursive;
     font-size: 16px;
     transition: 0.3s ease;
+}
+#log{
+    margin-right: 30px;
 }
 
 .nav-links a:hover {
@@ -62,6 +67,7 @@ body {
     gap: 5px;
     padding: 20px;
     cursor: pointer;
+    margin-right: 20px;
 }
 
 .burger span {
@@ -74,26 +80,30 @@ body {
 @media (max-width: 768px) {
 
     .title-img {
-        height: 38px;
+        height: 100px;
     }
 
     .nav-links {
         position: absolute;
-        top: 70px;
-        left: 0;
+        top: 65px;
+        right: 10px;
         width: 100%;
         background: #202123;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 20px 0;
-        gap: 15px;
-
+        padding: 10px 0;
+        gap: 10px;
+        border-radius: 10px;
         transform: translateY(-150%);
         transition: 0.3s ease-in-out;
     }
 
     .nav-links.active {
         transform: translateY(0);
+    }
+    #log{
+        margin-right: 0px;
     }
 
     .nav-links a {
@@ -113,4 +123,24 @@ body {
 
 .title-img {
     margin-top: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111827;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff6a00, #ffb347);
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ff3b3b, #ff6a00);
 }
