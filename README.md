@@ -1,3 +1,5 @@
+![RecipeHub Banner](screenshots/homepage.png)
+
 # RecipeHub — AI Powered Social Recipe Platform
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://recipe-hub-ucc0.onrender.com)
@@ -170,6 +172,30 @@ RecipeHub includes a modern responsive interface:
 
 ---
 
+
+# 📁 Project Structure
+
+```
+recipehub/
+│
+├── recipe/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── templates/
+│   ├── static/
+│
+├── ai_recipe/
+│
+├── cookrecipe/
+│   ├── settings.py
+│   ├── urls.py
+│
+├── manage.py
+```
+
+---
+
 # 🔐 Authorization Logic
 
 Only **authenticated users** can:
@@ -185,6 +211,37 @@ Only the **recipe owner** can:
 * Delete recipe
 
 This ensures secure and proper user ownership.
+
+---
+
+## 📸 Screenshots
+
+### 🏠 SignUp
+![SignUp](screenshots/homepage.png)
+
+### 🏠 Signin
+![Signin](screenshots/homepage.png)
+
+### 🏠 Homepage
+![Homepage](screenshots/homepage.png)
+
+### 🍳 Recipe Feed
+![Recipe Feed](screenshots/feed.png)
+
+### Original Recipe
+![OriginalRecipe](screenshots/social.png)
+
+### 🤖 AI Recipe Generator
+![AI Generator](screenshots/ai-chef.png)
+
+### ❤️ Social Features
+![Likes Comments](screenshots/social.png)
+
+### Update Recipe
+![UpdatePage](screenshots/social.png)
+
+### Mobile Version
+![MobileVersion](screenshots/social.png)
 
 ---
 
@@ -278,27 +335,46 @@ These variables are required for:
 | `/load-more-api/` | Loads external recipes via AJAX |
 
 ---
+## 🏗 System Architecture
 
-# 📁 Project Structure
+User
+   │
+   ▼
+Django Backend
+   │
+   ├── Authentication System
+   ├── Recipe CRUD API
+   ├── Social Features (Likes, Comments, Saves)
+   │
+   ▼
+Cloudinary (Image Storage)
 
-```
-recipehub/
-│
-├── recipe/
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   ├── templates/
-│   ├── static/
-│
-├── ai_recipe/
-│
-├── cookrecipe/
-│   ├── settings.py
-│   ├── urls.py
-│
-├── manage.py
-```
+External APIs
+   ├── TheMealDB API
+   └── AI Recipe Generator
+
+Frontend
+   ├── HTML
+   ├── CSS
+   └── JavaScript (AJAX)
+
+---
+
+## ☁️ Image Storage Flow
+
+User Upload
+   │
+   ▼
+Django Server
+   │
+   ▼
+Cloudinary Cloud Storage
+   │
+   ▼
+Image URL saved in database
+   │
+   ▼
+Displayed on website
 
 ---
 
@@ -347,10 +423,14 @@ Planned features:
 - GitHub: https://github.com/vruthvik-chinthoju
 - LinkedIn: https://www.linkedin.com/in/chinthoju-vruthvik-83754b320/
 
-
-
-
 Full-stack Django developer building modern web applications with AI and cloud integrations.
+
+---
+
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Django](https://img.shields.io/badge/Django-5.2-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Deploy](https://img.shields.io/badge/Deployed-Render-purple)
 
 ---
 
