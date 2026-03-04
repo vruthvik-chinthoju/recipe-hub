@@ -30,6 +30,7 @@ This project combines:
 * [📜 UI / UX](#-modern-uiux)
 * [🛠 Tech Stack](#-tech-stack)
 * [🔐 Authorization Logic](#-authorization-logic)
+* [📸 Screenshots](#-screenshots)
 * [📦 Installation](#-installation)
 * [⚙️ Environment Variables](#️-environment-variables)
 * [🌐 API Endpoints](#-api-endpoints)
