@@ -1,5 +1,7 @@
 # RecipeHub — AI Powered Social Recipe Platform
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://recipe-hub-ucc0.onrender.com)
+
 RecipeHub is a **Full-Stack Django web application** that allows users to create, explore, and interact with recipes using modern social features and AI assistance.
 
 This project combines:
@@ -341,9 +343,11 @@ Planned features:
 
 # 👨‍💻 Author
 
-- Name: Ruthvik Chintu
-- GitHub: https://github.com/your-username
-- LinkedIn: https://linkedin.com/in/your-profile
+- Name: Ruthvik Chintu-
+- GitHub: https://github.com/vruthvik-chinthoju
+- LinkedIn: https://www.linkedin.com/in/chinthoju-vruthvik-83754b320/
+
+
 
 
 Full-stack Django developer building modern web applications with AI and cloud integrations.
