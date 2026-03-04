@@ -54,6 +54,14 @@
         function toggleMenu() {
             document.querySelector(".nav-links").classList.toggle("active");
         }
+
+        setTimeout(function () {
+            document.querySelectorAll(".message").forEach(function (msg) {
+                msg.style.opacity = "0";
+                setTimeout(() => msg.remove(), 500);
+            });
+        }, 4000);
+
     </script>
 </body>
 
