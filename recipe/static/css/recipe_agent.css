@@ -118,6 +118,7 @@ body{
         background-image: url('../images/wallpaper2.jpeg');
         background-size: cover;
         background-position: center;
+        font-family: sans-serif;
     }
 
     .mid {
@@ -143,6 +144,7 @@ body{
     }
 
     .input-bar textarea {
-        width: 80%;
+        font-family: cursive;
+        width: 90%;
     }
 }

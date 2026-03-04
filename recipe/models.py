@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 import uuid
 
 
@@ -9,7 +10,7 @@ class RecipeData(models.Model):
     recipe_name = models.CharField(max_length=150,db_index=True)
     recipe_description = models.TextField()
     rating = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='image/')
+    image = CloudinaryField('image')
 
     def __str__(self):
         return self.recipe_name
