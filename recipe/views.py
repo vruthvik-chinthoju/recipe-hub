@@ -47,18 +47,22 @@ def logout_view(request):
 @login_required(login_url="signin")
 def home(request):
     if request.method == "POST":
-        RecipeData.objects.create(
-            user=request.user,  
-            recipe_name=request.POST.get('recipe_name',''),
-            recipe_description=request.POST.get('recipe_description',''),
-            rating=request.POST.get('rating',''),
-            image=request.FILES.get('recipe_image','')
-        )
-
-        messages.success(request, "Recipe added Successfully.")
+        try:
+            image = request.FILES.get('recipe_image')
+            RecipeData.objects.create(
+                user=request.user,
+                recipe_name=request.POST.get('recipe_name', ''),
+                recipe_description=request.POST.get('recipe_description', ''),
+                rating=request.POST.get('rating', ''),
+                image=image
+            )
+            messages.success(request, "Recipe added successfully.")
+        except Exception as e:
+            print("Upload Error:", e)  # will appear in Render logs
+            messages.error(request, "Error uploading recipe. Please try again.")
         return redirect('home')
 
-    return render(request,'home.html')
+    return render(request, 'home.html')
 
 def view(request):
 
