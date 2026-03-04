@@ -1,4 +1,4 @@
-![RecipeHub Banner](screnshots/original-recipes.png)
+![RecipeHub Banner](screenshots/original-recipes.png)
 
 # RecipeHub — AI Powered Social Recipe Platform
 
@@ -228,11 +228,6 @@ This ensures secure and proper user ownership.
 ### 🤖 Recipe AI Agent
 ![Recipe AI Agent](screenshots/recipe-ai-agent.png)
 
-### 📱 Mobile Version
-![Mobile Version](screenshots/mobile-version.png)
-
-### 📱 Mobile AI Assistant
-![Mobile AI](screenshots/mobile-ai.png)
 
 ### 💾 Saved Recipes
 ![Saved Recipes](screenshots/saved-recipes.png)
@@ -249,6 +244,11 @@ This ensures secure and proper user ownership.
 ### 📖 View Entire Recipe
 ![View Entire Recipe](screenshots/view-entire.png)
 
+### 📱 Mobile Version
+![Mobile Version](screenshots/mobile-version.png)
+
+### 📱 Mobile AI Assistant
+![Mobile AI](screenshots/mobile-ai.png)
 
 ---
 
