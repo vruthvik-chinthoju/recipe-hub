@@ -71,7 +71,6 @@ def view(request):
     recipe_datas = RecipeData.objects.all()
     external_recipes = []
 
-    # 🔎 If searching
     if query:
 
         # Filter original recipes
@@ -80,41 +79,39 @@ def view(request):
             Q(recipe_description__icontains=query)
         )
 
-        # Search external API
+        # External search
         try:
             url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={query}"
-            response = requests.get(url, timeout=5)
-            data = response.json()
-            external_recipes = data.get("meals", []) or []
-        except:
-            external_recipes = []
+            response = requests.get(url, timeout=3)
+
+            if response.status_code == 200:
+                data = response.json()
+                external_recipes = data.get("meals", []) or []
+
+        except Exception as e:
+            print("External API Error:", e)
 
     else:
-        # Load random external recipes only when not searching
-        seen_ids = set()
-
+        # Only ONE random API call (fast)
         try:
-            while len(external_recipes) < 6:
-                r = requests.get(
-                    "https://www.themealdb.com/api/json/v1/1/random.php",
-                    timeout=5
-                )
-                meal = r.json().get("meals")
+            r = requests.get(
+                "https://www.themealdb.com/api/json/v1/1/random.php",
+                timeout=3
+            )
 
+            if r.status_code == 200:
+                meal = r.json().get("meals")
                 if meal:
-                    meal = meal[0]
-                    if meal["idMeal"] not in seen_ids:
-                        seen_ids.add(meal["idMeal"])
-                        external_recipes.append(meal)
-        except:
-            external_recipes = []
+                    external_recipes = meal
+
+        except Exception as e:
+            print("Random API Error:", e)
 
     return render(request, "view.html", {
         "recipe_datas": recipe_datas,
         "external_recipes": external_recipes,
         "search_query": query
     })
-
 
 def view_1(request, sid):
     data = get_object_or_404(RecipeData, recipe_id=sid)
