@@ -309,6 +309,19 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     ".onrender.com",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "None"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
