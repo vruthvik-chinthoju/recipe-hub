@@ -1,4 +1,4 @@
-![RecipeHub Banner](screenshots/homepage.png)
+![RecipeHub Banner](screnshots/original-recipes.png)
 
 # RecipeHub — AI Powered Social Recipe Platform
 
@@ -216,32 +216,39 @@ This ensures secure and proper user ownership.
 
 ## 📸 Screenshots
 
-### 🏠 SignUp
-![SignUp](screenshots/homepage.png)
+### 📝 Register
+![Register](screenshots/register.png)
 
-### 🏠 Signin
-![Signin](screenshots/homepage.png)
+### 🍳 Recipes Feed
+![Recipes](screenshots/recipes.png)
 
-### 🏠 Homepage
-![Homepage](screenshots/homepage.png)
+### 🍲 Original Recipes
+![Original Recipes](screenshots/original-recipes.png)
 
-### 🍳 Recipe Feed
-![Recipe Feed](screenshots/feed.png)
+### 🤖 Recipe AI Agent
+![Recipe AI Agent](screenshots/recipe-ai-agent.png)
 
-### Original Recipe
-![OriginalRecipe](screenshots/social.png)
+### 📱 Mobile Version
+![Mobile Version](screenshots/mobile-version.png)
 
-### 🤖 AI Recipe Generator
-![AI Generator](screenshots/ai-chef.png)
+### 📱 Mobile AI Assistant
+![Mobile AI](screenshots/mobile-ai.png)
 
-### ❤️ Social Features
-![Likes Comments](screenshots/social.png)
+### 💾 Saved Recipes
+![Saved Recipes](screenshots/saved-recipes.png)
 
-### Update Recipe
-![UpdatePage](screenshots/social.png)
+### 🌐 Social Interaction
+![Social Interactive](screenshots/social-interactive.png)
 
-### Mobile Version
-![MobileVersion](screenshots/social.png)
+### 🔎 External Recipes API (TheMealDB)
+![TheMealDB API](screenshots/themealdbapi.png)
+
+### ✏️ Update Recipe
+![Update Recipe](screenshots/update-recipe.png)
+
+### 📖 View Entire Recipe
+![View Entire Recipe](screenshots/view-entire.png)
+
 
 ---
 
