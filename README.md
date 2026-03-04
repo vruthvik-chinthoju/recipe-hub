@@ -246,10 +246,10 @@ This ensures secure and proper user ownership.
 ![View Entire Recipe](screenshots/view-entire.png)
 
 ### 📱 Mobile Version
-![Mobile Version](screenshots/mobile-version.png)
+![Mobile Version](screenshots/phone.jpg)
 
-### 📱 Mobile AI Assistant
-![Mobile AI](screenshots/mobile-ai.png)
+### 📱 Mobile Version
+![Mobile AI](screenshots/phone1.jpg)
 
 ---
 
